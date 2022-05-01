@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">mi_todo</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="update_task">Update task</string>
+    <string name="new_task">Add new task</string>
+    <string name="task_list">Task List</string>
+    <string name="title">Title</string>
+    <string name="description">Description</string>
+    <string name="search">search</string>
+    <string name="sort_by">Sort By</string>
+    <string name="priority_high">Priority High</string>
+    <string name="priority_low">Priority Low</string>
+    <string name="delete_all">Delete all</string>
+    <string name="guardar">Guardar</string>
+    <string name="update">Update</string>
+    <string name="delete">Delete</string>
+    <string-array name="priorities">
+        <item>High priority</item>
+        <item>Medium priority</item>
+        <item>Low priority</item>
+    </string-array>
+</resources>
