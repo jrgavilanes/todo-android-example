@@ -15,6 +15,8 @@
     <string name="guardar">Guardar</string>
     <string name="update">Update</string>
     <string name="delete">Delete</string>
+    <string name="all_registers_are_deleted">Se ha borrado todos los registros</string>
+    <string name="sure_you_want_delete_all">Seguro que quieres borrar todos los registros?</string>
     <string-array name="priorities">
         <item>High priority</item>
         <item>Medium priority</item>

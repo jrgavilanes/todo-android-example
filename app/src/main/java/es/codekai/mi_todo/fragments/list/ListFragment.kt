@@ -28,8 +28,8 @@ class ListFragment : Fragment() {
     private inner class ToDoListHolder(view: View) : RecyclerView.ViewHolder(view) {
         val title: TextView = itemView.findViewById(R.id.title_txt)
         val description: TextView = itemView.findViewById(R.id.description_txt)
-        val tarjeta: ConstraintLayout = itemView.findViewById(R.id.tarjeta)
-        val priority_indicator: CardView = itemView.findViewById(R.id.priority_indicator)
+        val card: ConstraintLayout = itemView.findViewById(R.id.tarjeta)
+        val priorityIndicator: CardView = itemView.findViewById(R.id.priority_indicator)
     }
 
     private inner class ToDoListAdapter(var todos: List<ToDoData>) :
@@ -45,20 +45,20 @@ class ListFragment : Fragment() {
                 title.text = todo.title
                 description.text = todo.description
                 when (todo.priority) {
-                    Priority.HIGH -> priority_indicator.setCardBackgroundColor(
-                        resources.getColor(R.color.red)
+                    Priority.HIGH -> priorityIndicator.setCardBackgroundColor(
+                        resources.getColor(R.color.red, requireActivity().theme)
                     )
-                    Priority.MEDIUM -> priority_indicator.setCardBackgroundColor(
+                    Priority.MEDIUM -> priorityIndicator.setCardBackgroundColor(
                         resources.getColor(
-                            R.color.yellow
+                            R.color.yellow, requireActivity().theme
                         )
                     )
-                    Priority.LOW -> priority_indicator.setCardBackgroundColor(
-                        resources.getColor(R.color.green)
+                    Priority.LOW -> priorityIndicator.setCardBackgroundColor(
+                        resources.getColor(R.color.green, requireActivity().theme)
                     )
                 }
 
-                tarjeta.setOnClickListener {
+                card.setOnClickListener {
                     val action =
                         ListFragmentDirections.actionListFragmentToUpdateFragment(todos[position])
                     itemView.findNavController().navigate(action)
@@ -113,12 +113,12 @@ class ListFragment : Fragment() {
         builder.setPositiveButton("Yes") { _, _ ->
             Toast.makeText(
                 requireContext(),
-                "Se ha borrado todos los registros",
+                getString(R.string.all_registers_are_deleted),
                 Toast.LENGTH_SHORT
             ).show()
         }
         builder.setNegativeButton("No") { _, _ -> }
-        builder.setTitle("Seguro que quieres borrar todos los registros?")
+        builder.setTitle(getString(R.string.sure_you_want_delete_all))
         builder.create().show()
     }
 }
