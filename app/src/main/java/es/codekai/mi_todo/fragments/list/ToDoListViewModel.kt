@@ -21,5 +21,4 @@ class ToDoListViewModel(application: Application) : AndroidViewModel(application
             repository.insertData(toDoData)
         }
     }
-
 }

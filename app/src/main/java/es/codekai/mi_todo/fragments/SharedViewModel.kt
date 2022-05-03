@@ -24,6 +24,14 @@ class SharedViewModel(application: Application) : AndroidViewModel(application) 
         }
     }
 
+    fun parsePriorityToInt(priority: Priority): Int {
+        return when (priority) {
+            Priority.HIGH -> 0
+            Priority.MEDIUM -> 1
+            Priority.LOW -> 2
+        }
+    }
+
     val listener: AdapterView.OnItemSelectedListener = object :
         AdapterView.OnItemSelectedListener {
         override fun onNothingSelected(p0: AdapterView<*>?) {}

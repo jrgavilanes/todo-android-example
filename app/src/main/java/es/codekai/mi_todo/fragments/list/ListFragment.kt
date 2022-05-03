@@ -1,8 +1,10 @@
 package es.codekai.mi_todo.fragments.list
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.*
 import android.widget.TextView
+import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
@@ -57,12 +59,9 @@ class ListFragment : Fragment() {
                 }
 
                 tarjeta.setOnClickListener {
-//                    Toast.makeText(requireContext(), "$todo", Toast.LENGTH_SHORT).show()
                     val action =
-                        ListFragmentDirections
-                            .actionListFragmentToUpdateFragment(todos[position])
-                    itemView.findNavController()
-                        .navigate(action)
+                        ListFragmentDirections.actionListFragmentToUpdateFragment(todos[position])
+                    itemView.findNavController().navigate(action)
                 }
             }
         }
@@ -77,13 +76,9 @@ class ListFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         binding = FragmentListBinding.inflate(inflater, container, false)
-
         setHasOptionsMenu(true)
-
         updateUI()
-
         return binding.root
     }
 
@@ -104,5 +99,26 @@ class ListFragment : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.list_fragment_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.menu_delete_all -> deleteAll()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun deleteAll() {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setPositiveButton("Yes") { _, _ ->
+            Toast.makeText(
+                requireContext(),
+                "Se ha borrado todos los registros",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+        builder.setNegativeButton("No") { _, _ -> }
+        builder.setTitle("Seguro que quieres borrar todos los registros?")
+        builder.create().show()
     }
 }

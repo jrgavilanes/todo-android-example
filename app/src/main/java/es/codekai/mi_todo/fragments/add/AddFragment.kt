@@ -60,7 +60,7 @@ class AddFragment : Fragment() {
                 description = description
             )
             mTodoViewModel.insertData(newData)
-            Toast.makeText(requireContext(), "añadido guay", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "Se ha añadido '$title'", Toast.LENGTH_SHORT).show()
             findNavController().navigate(R.id.action_addFragment_to_listFragment)
         } else {
             Toast.makeText(requireContext(), "Rellena todos los campos", Toast.LENGTH_SHORT).show()
