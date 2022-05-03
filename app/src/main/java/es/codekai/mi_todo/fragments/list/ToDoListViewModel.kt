@@ -9,7 +9,7 @@ class ToDoListViewModel : ViewModel() {
     val todos = mutableListOf<ToDoData>()
 
     init {
-        for (i in 1..100) {
+        for (i in 1..10) {
             val todo = ToDoData(
                 id = i,
                 title = "Task $i",
@@ -19,5 +19,4 @@ class ToDoListViewModel : ViewModel() {
             todos.add(todo)
         }
     }
-
 }
