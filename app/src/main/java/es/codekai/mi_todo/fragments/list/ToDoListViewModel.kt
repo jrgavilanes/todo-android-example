@@ -1,22 +1,25 @@
 package es.codekai.mi_todo.fragments.list
 
-import androidx.lifecycle.ViewModel
-import es.codekai.mi_todo.data.models.Priority
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.viewModelScope
+import es.codekai.mi_todo.data.ToDoDatabase
 import es.codekai.mi_todo.data.models.ToDoData
+import es.codekai.mi_todo.data.repository.ToDoRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
-class ToDoListViewModel : ViewModel() {
+class ToDoListViewModel(application: Application) : AndroidViewModel(application) {
 
-    val todos = mutableListOf<ToDoData>()
+    private val toDoDao = ToDoDatabase.getDatabase(application).todoDao()
+    private val repository: ToDoRepository = ToDoRepository(toDoDao)
+    val getAllData: LiveData<List<ToDoData>> = repository.getAllData
 
-    init {
-        for (i in 1..10) {
-            val todo = ToDoData(
-                id = i,
-                title = "Task $i",
-                priority = Priority.LOW,
-                description = "description task $i"
-            )
-            todos.add(todo)
+    fun insertData(toDoData: ToDoData) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.insertData(toDoData)
         }
     }
+
 }
