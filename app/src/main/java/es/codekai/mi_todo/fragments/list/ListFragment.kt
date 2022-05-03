@@ -1,15 +1,14 @@
 package es.codekai.mi_todo.fragments.list
 
 import android.os.Bundle
-import android.util.Log
-import android.view.* // ktlint-disable no-wildcard-imports
+import android.view.*
 import android.widget.TextView
-import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -56,9 +55,14 @@ class ListFragment : Fragment() {
                         resources.getColor(R.color.green)
                     )
                 }
-                Log.i("juanra", "${todo.priority}")
+
                 tarjeta.setOnClickListener {
-                    Toast.makeText(requireContext(), "$todo", Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(requireContext(), "$todo", Toast.LENGTH_SHORT).show()
+                    val action =
+                        ListFragmentDirections
+                            .actionListFragmentToUpdateFragment(todos[position])
+                    itemView.findNavController()
+                        .navigate(action)
                 }
             }
         }

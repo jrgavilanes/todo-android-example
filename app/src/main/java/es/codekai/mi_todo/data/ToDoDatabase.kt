@@ -31,7 +31,5 @@ abstract class ToDoDatabase : RoomDatabase() {
                 return instance
             }
         }
-
     }
-
 }

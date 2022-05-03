@@ -1,14 +1,12 @@
 package es.codekai.mi_todo.fragments.add
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import es.codekai.mi_todo.R
-import es.codekai.mi_todo.data.models.Priority
 import es.codekai.mi_todo.data.models.ToDoData
 import es.codekai.mi_todo.data.viewmodel.ToDoViewModel
 import es.codekai.mi_todo.databinding.FragmentAddBinding
@@ -22,16 +20,18 @@ class AddFragment : Fragment() {
     private val mSharedViewModel: SharedViewModel by viewModels()
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-
-        binding = FragmentAddBinding.inflate(inflater, container, false)
-
+    ): View {
         setHasOptionsMenu(true)
-
+        binding = FragmentAddBinding.inflate(inflater, container, false)
+        setUI()
         return binding.root
+    }
 
+    private fun setUI() {
+        binding.prioritiesSpinner.onItemSelectedListener = mSharedViewModel.listener
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -65,9 +65,5 @@ class AddFragment : Fragment() {
         } else {
             Toast.makeText(requireContext(), "Rellena todos los campos", Toast.LENGTH_SHORT).show()
         }
-
     }
-
-
-
 }
