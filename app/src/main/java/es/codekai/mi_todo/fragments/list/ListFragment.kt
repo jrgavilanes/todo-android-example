@@ -121,4 +121,5 @@ class ListFragment : Fragment() {
         builder.setTitle(getString(R.string.sure_you_want_delete_all))
         builder.create().show()
     }
+
 }

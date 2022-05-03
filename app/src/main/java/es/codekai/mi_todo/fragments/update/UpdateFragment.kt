@@ -36,7 +36,7 @@ class UpdateFragment : Fragment() {
     private fun setUI() {
         binding.titleEt.setText(args.currentItem.title)
         binding.prioritiesSpinner.setSelection(mSharedViewModel.parsePriorityToInt(args.currentItem.priority))
-        binding.prioritiesSpinner.onItemSelectedListener = mSharedViewModel.listener
+//        binding.prioritiesSpinner.onItemSelectedListener = mSharedViewModel.listener
         binding.descriptionEt.setText(args.currentItem.description)
     }
 
@@ -66,8 +66,9 @@ class UpdateFragment : Fragment() {
                 description = description
             )
             mToDoViewModel.updateData(updateItem)
-            Toast.makeText(requireContext(), "Actualizado guay", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "Actualizado '$title'", Toast.LENGTH_SHORT).show()
             findNavController().navigate(R.id.action_updateFragment_to_listFragment)
+
         } else {
             Toast.makeText(requireContext(), "Rellena todos los campos", Toast.LENGTH_SHORT).show()
         }

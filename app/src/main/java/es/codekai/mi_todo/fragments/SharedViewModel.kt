@@ -66,6 +66,14 @@ class SharedViewModel(application: Application) : AndroidViewModel(application) 
                         )
                     )
                 }
+                else -> {
+                    (parent?.getChildAt(0) as TextView).setTextColor(
+                        ContextCompat.getColor(
+                            application,
+                            R.color.green
+                        )
+                    )
+                }
             }
         }
     }

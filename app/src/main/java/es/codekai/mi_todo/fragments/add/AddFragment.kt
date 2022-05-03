@@ -14,10 +14,11 @@ import es.codekai.mi_todo.fragments.SharedViewModel
 
 class AddFragment : Fragment() {
 
-    private lateinit var binding: FragmentAddBinding
-
     private val mTodoViewModel: ToDoViewModel by viewModels()
     private val mSharedViewModel: SharedViewModel by viewModels()
+
+    private var _binding: FragmentAddBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -25,13 +26,13 @@ class AddFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         setHasOptionsMenu(true)
-        binding = FragmentAddBinding.inflate(inflater, container, false)
+        _binding = FragmentAddBinding.inflate(inflater, container, false)
         setUI()
         return binding.root
     }
 
     private fun setUI() {
-        binding.prioritiesSpinner.onItemSelectedListener = mSharedViewModel.listener
+        //binding.prioritiesSpinner.onItemSelectedListener = mSharedViewModel.listener
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -65,5 +66,10 @@ class AddFragment : Fragment() {
         } else {
             Toast.makeText(requireContext(), "Rellena todos los campos", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 }
