@@ -68,7 +68,6 @@ class UpdateFragment : Fragment() {
             mToDoViewModel.updateData(updateItem)
             Toast.makeText(requireContext(), "Actualizado '$title'", Toast.LENGTH_SHORT).show()
             findNavController().navigate(R.id.action_updateFragment_to_listFragment)
-
         } else {
             Toast.makeText(requireContext(), "Rellena todos los campos", Toast.LENGTH_SHORT).show()
         }

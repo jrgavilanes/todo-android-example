@@ -77,21 +77,24 @@ class ListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentListBinding.inflate(inflater, container, false)
+        binding.lifecycleOwner = this
+        binding.mSharedViewModel = mTodoViewListViewModel
         setHasOptionsMenu(true)
         updateUI()
         return binding.root
     }
 
     private fun updateUI() {
-
-        binding.floatingActionButton.setOnClickListener {
-            findNavController().navigate(R.id.action_listFragment_to_addFragment)
-        }
+        // Lo hago por databinding
+//        binding.floatingActionButton.setOnClickListener {
+//            findNavController().navigate(R.id.action_listFragment_to_addFragment)
+//        }
 
         mTodoViewListViewModel.getAllData.observe(
             viewLifecycleOwner,
             Observer { data ->
                 binding.recyclerView.adapter = ToDoListAdapter(data)
+                mTodoViewListViewModel.checkIfDatabaseIsEmpty(data)
                 binding.recyclerView.layoutManager = LinearLayoutManager(context)
             }
         )
@@ -111,6 +114,7 @@ class ListFragment : Fragment() {
     private fun deleteAll() {
         val builder = AlertDialog.Builder(requireContext())
         builder.setPositiveButton("Yes") { _, _ ->
+            mTodoViewListViewModel.deleteAll()
             Toast.makeText(
                 requireContext(),
                 getString(R.string.all_registers_are_deleted),
@@ -121,5 +125,4 @@ class ListFragment : Fragment() {
         builder.setTitle(getString(R.string.sure_you_want_delete_all))
         builder.create().show()
     }
-
 }
